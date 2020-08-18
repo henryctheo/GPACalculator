@@ -6,21 +6,27 @@
 double grade_to_gpa(std::string grade);
 
 int main() {
-	std::vector<std::pair<int, int>> classes;
-	std::string class_name = "";
+	std::string class_name;
+	double MHP = 0;
+	double total_credits = 0;
 	while (class_name != "done") {
 		std::cout << "Enter class name or \' done \' to quit.\n";
-		std::getline(std::cin, class_name);
+		std::cin >> class_name;
 		if (class_name == "done") break;
 		std::cout << "How many credit hours?\n";
 		double credits = 0;
 		std::cin >> credits;
-		std::cout << "What grade did you get?\nFormat: A+, B, C-";
+		std::cout << "What grade did you get?\nFormat: A+, B, C-\n";
 		std::string grade;
 		std::cin >> grade;
-		classes.push_back(std::make_pair(credits, grade_to_gpa(grade)));
+		total_credits += credits;
+		MHP += credits * grade_to_gpa(grade);
+		class_name = "";
 	}
 
+	double final_gpa = MHP / total_credits;
+
+	std::cout << "TERM GPA: " << final_gpa << "\n";
 	
 
 	return 0;
